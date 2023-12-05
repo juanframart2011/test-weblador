@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +14,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(UserSeeder::class);
+    }
+}
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Limpiamos la tabla antes de insertar nuevos datos
+        DB::table('users')->truncate();
+
+        // Insertamos el usuario por defecto
+        DB::table('users')->insert([
+            'name' => 'Juan',
+            'email' => 'juan@test.com',
+            'password' => Hash::make('123456'), // Laravel automáticamente encripta la contraseña
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Puedes agregar más usuarios según sea necesario
     }
 }
