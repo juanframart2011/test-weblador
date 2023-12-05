@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Login;
+use App\Livewire\ProjectList;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', Login::class); // Ruta para el componente de inicio de sesión
+Route::get('/projects', ProjectList::class); // Ruta para el componente de lista de proyectos
